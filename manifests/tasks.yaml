@@ -28,7 +28,7 @@ spec:
             secretKeyRef:
               key: password
               name: oneview
-      image: 'quay.io/fdavalo/oneview-2-acm-assets:latest'
+      image: 'quay.io/fdavalo/oneview-2-acm-assets:v1'
       name: infos
       resources: {}
     - image: 'image-registry.openshift-image-registry.svc:5000/openshift/cli:latest'
@@ -36,15 +36,19 @@ spec:
       resources: {}
       script: |
         #!/usr/bin/env bash
+
         cat /workspace/result/*
+
         oc apply -f /workspace/result/$(inputs.params.serverName).yaml
     - image: registry.access.redhat.com/ubi7/ubi
       name: mac
       resources: {}
       script: >
-        #!/usr/bin/env bash
+        #!/usr/bin/env bash 
+
 
         mac=`cat /workspace/result/$(inputs.params.serverName).mac`
+
 
         curl http://cluster-ip.redhat.hpecic.net:8080 -d
         "host=$(inputs.params.serverName)&mac=$mac"
