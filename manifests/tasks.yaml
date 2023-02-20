@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: oneview-register-host
+  name: oneview-register-asset
   namespace: hpe-redhat
 spec:
   params:
@@ -28,9 +28,16 @@ spec:
             secretKeyRef:
               key: password
               name: oneview
-      image: 'quay.io/fdavalo/oneview-2-acm-assets:v1'
+      image: 'quay.io/fdavalo/oneview-2-acm-assets:latest'
       name: infos
       resources: {}
+    - image: 'image-registry.openshift-image-registry.svc:5000/openshift/cli:latest'
+      name: bmh
+      resources: {}
+      script: |
+        #!/usr/bin/env bash
+        cat /workspace/result/*
+        oc apply -f /workspace/result/$(inputs.params.serverName).yaml
     - image: registry.access.redhat.com/ubi7/ubi
       name: mac
       resources: {}
