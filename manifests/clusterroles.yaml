@@ -1,0 +1,89 @@
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: pipeline-run
+rules:
+  - verbs:
+      - get
+      - watch
+      - list
+      - create
+    apiGroups:
+      - tekton.dev
+    resources:
+      - pipelineruns
+  - verbs:
+      - get
+      - watch
+      - list
+      - exec
+    apiGroups:
+      - tekton.dev
+    resources:
+      - pipelines
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: edit-bmh
+rules:
+  - verbs:
+      - get
+      - watch
+      - list
+      - create
+      - delete
+    apiGroups:
+      - ''
+    resources:
+      - secrets
+  - verbs:
+      - get
+      - watch
+      - list
+      - create
+      - delete
+    apiGroups:
+      - metal3.io
+    resources:
+      - baremetalhosts
+  - verbs:
+      - get
+      - watch
+      - list
+      - create
+      - delete
+    apiGroups:
+      - agent-install.openshift.io
+    resources:
+      - agents
+  - verbs:
+      - get
+      - watch
+      - list
+      - create
+      - delete
+    apiGroups:
+      - agent.open-cluster-management.io
+    resources:
+      - klusterletaddonconfigs
+  - verbs:
+      - get
+      - watch
+      - list
+      - create
+      - delete
+    apiGroups:
+      - hive.openshift.io
+    resources:
+      - clusterdeployments
+  - verbs:
+      - get
+      - watch
+      - list
+      - create
+      - delete
+    apiGroups:
+      - extensions.hive.openshift.io
+    resources:
+      - agentclusterinstalls
