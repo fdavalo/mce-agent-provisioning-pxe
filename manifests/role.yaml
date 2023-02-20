@@ -1,0 +1,15 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: update-agents-baremetal
+  namespace: baremetal
+rules:
+  - verbs:
+      - get
+      - list
+      - patch
+      - update
+    apiGroups:
+      - agent-install.openshift.io
+    resources:
+      - agents
