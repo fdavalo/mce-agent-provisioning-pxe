@@ -39,3 +39,31 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: reset-metal3
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: edit-bmh-bm4
+  namespace: bm4
+subjects:
+  - kind: ServiceAccount
+    name: pipeline
+    namespace: hpe-redhat
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: edit-bmh
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: edit-bmh-bm4-user
+  namespace: bm4
+subjects:
+  - kind: User
+    apiGroup: rbac.authorization.k8s.io
+    name: hpe_redhat
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: edit-bmh
