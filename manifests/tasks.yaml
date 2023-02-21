@@ -106,7 +106,7 @@ spec:
             secretKeyRef:
               key: password
               name: oneview
-      image: 'quay.io/fdavalo/oneview-2-acm-assets:latest'
+      image: 'quay.io/fdavalo/oneview-2-acm-assets:v1'
       name: deleteprofile
       resources: {}
     - command:
